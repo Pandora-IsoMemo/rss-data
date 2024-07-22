@@ -1,0 +1,24 @@
+Package: rssData
+Type: Package
+Title: Saving RSS fetched text in a central database
+Version: 0.1.0
+Authors@R: c(
+    person("Sarah", "Wagner", email = "sarah.wagner@inwt-statistics.de", role = c("aut", "cre"))
+    )
+Maintainer: INWT Statistics <sarah.wagner@inwt-statistics.de>
+Description: The rssData package is designed to manage and store daily RSS feed entries into a 
+  central database table. This package utilizes the tidyRSS R package and the tidyfeed function 
+  to read and process RSS sources.
+License: GPL (>= 3)
+Imports:
+  futile.logger, 
+  tidyRSS,
+  yaml,
+  httr,
+  rvest,
+  stringr,
+  dplyr
+Suggests: lintr, testthat
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1

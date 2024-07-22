@@ -1,0 +1,25 @@
+# RSS sources
+sources:
+  Source_1:
+    url: "http://rss.cnn.com/rss/edition_world.rss"
+    name: "CNN"
+    description: "Edition World"
+    category: "Example 1"
+    id: 1
+  Source_2:
+    url: "http://feeds.bbci.co.uk/news/world/rss.xml"
+    name: "BBC"
+    description: "News World"
+    category: "Example 2"
+    id: 2
+
+
+# Mapping for all columns of the target table on the database
+# Please, add columns as needed (e.g. `date_last_updated`, `id`, ...)!
+fieldMapping:
+  source: "feed_title"
+  title: "item_title"
+  link: "item_link"
+  text: "item_text"
+  ts_feed_updated: "feed_last_build_date"
+  ts_item_published: "item_pub_date"
