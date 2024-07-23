@@ -4,6 +4,7 @@
 #' @importFrom rvest read_html html_nodes html_text
 #' @importFrom stringr str_squish
 #' @importFrom tidyRSS tidyfeed
+#' @importFrom dbtools Credentials sendData sendQuery
 #' @import dplyr
 #' @importFrom rlang :=
 NULL

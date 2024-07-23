@@ -2,9 +2,9 @@
 sources:
   Source_1:
     url: "http://rss.cnn.com/rss/edition_world.rss"
-    name: "CNN"
-    description: "Edition World"
-    category: "Example 1"
+    name: "CNN" # not used
+    description: "Edition World" # not used
+    category: "Example 1" # not used
     id: 1
   Source_2:
     url: "http://feeds.bbci.co.uk/news/world/rss.xml"
@@ -17,6 +17,7 @@ sources:
 # Mapping for all columns of the target table on the database
 # Please, add columns as needed (e.g. `date_last_updated`, `id`, ...)!
 fieldMapping:
+  source_id: "source_id" # generated here
   source: "feed_title"
   title: "item_title"
   link: "item_link"

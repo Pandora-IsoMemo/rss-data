@@ -2,18 +2,19 @@
 #'
 #' This function reads and processes RSS feeds, extracting specified fields.
 #'
-#' @param feed (list) source feed entry from the configuration file.
+#' @param source (list) source feed entry from the configuration file.
 #' @param config (list) configuration file with column mapping and rss field names.
 #' @export
 #'
 #' @return A data frame containing the requested fields from the RSS feed.
-read_rss_feeds <- function(feed, config) {
+read_rss_feeds <- function(source, config) {
   fields <- read_field_mapping(config)$rss_names
   rss_field_names <- read_rss_fields(config)
 
-  logging("Reading source feed %s.", feed$url)
+  logging("Reading source feed %s.", source$url)
 
-  feed <- tidyfeed(feed$url)
+  feed <- tidyfeed(source$url)
+  feed[["source_id"]] <- source$id
   feed_columns <- colnames(feed)
   feed_data <- feed[, feed_columns %in% fields, drop = FALSE]
 

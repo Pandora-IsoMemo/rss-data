@@ -4,10 +4,10 @@
 \alias{read_rss_feeds}
 \title{Read RSS Feeds}
 \usage{
-read_rss_feeds(feed, config)
+read_rss_feeds(source, config)
 }
 \arguments{
-\item{feed}{(list) source feed entry from the configuration file.}
+\item{source}{(list) source feed entry from the configuration file.}
 
 \item{config}{(list) configuration file with column mapping and rss field names.}
 }
