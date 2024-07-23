@@ -2,13 +2,13 @@
 % Please edit documentation in R/01_process_yaml_config.R
 \name{read_rss_sources}
 \alias{read_rss_sources}
-\title{Read RSS Sources from YAML Config}
+\title{Read RSS Sources from Configuration}
 \usage{
-read_rss_sources(config_file = "config.yaml")
+read_rss_sources(config)
 }
 \arguments{
-\item{config_file}{(str) name of config file}
+\item{config}{(list) the configuration object}
 }
 \description{
-Read RSS Sources from YAML Config
+Read RSS Sources from Configuration
 }

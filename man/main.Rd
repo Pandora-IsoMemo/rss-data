@@ -4,7 +4,7 @@
 \alias{main}
 \title{Run feed collector}
 \usage{
-main(feeds = read_rss_sources())
+main(config_file = "config.yaml")
 }
 \arguments{
 \item{feeds}{(list) see result of \code{read_rss_sources()}}

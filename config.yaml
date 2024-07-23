@@ -23,3 +23,9 @@ fieldMapping:
   text: "item_text"
   ts_feed_updated: "feed_last_build_date"
   ts_item_published: "item_pub_date"
+# specify how the fields with the text and the field with the url to text are called
+# only change the values (left from the :), keys stay fixed
+# !! must be the same as in fieldMapping !!
+rssFields:
+  text: "item_text"
+  link: "item_link"

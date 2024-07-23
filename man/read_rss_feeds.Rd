@@ -4,13 +4,20 @@
 \alias{read_rss_feeds}
 \title{Read RSS Feeds}
 \usage{
-read_rss_feeds(feed, fields = read_field_mapping()$rss_names)
+read_rss_feeds(feed, config)
 }
 \arguments{
-\item{fields}{(str) fields to read from the rss feed}
-
 \item{feed_url}{(str) url of the rss feed}
+
+\item{fields}{(str) fields to read from the rss feed.
+Default is the rss_names from read_field_mapping().}
+}
+\value{
+A data frame containing the requested fields from the RSS feed.
 }
 \description{
-Read RSS Feeds
+This function reads and processes RSS feeds, extracting specified fields.
+}
+\examples{
+read_rss_feeds("https://example.com/rss")
 }

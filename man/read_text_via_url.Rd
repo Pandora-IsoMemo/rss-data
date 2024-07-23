@@ -2,13 +2,21 @@
 % Please edit documentation in R/02_read_rss.R
 \name{read_text_via_url}
 \alias{read_text_via_url}
-\title{Read item_text via Provided Link in RSS Feed}
+\title{Fetch and read text from a URL}
 \usage{
 read_text_via_url(url)
 }
 \arguments{
-\item{url}{(str) item_link from the rss feed}
+\item{url}{A string representing the URL to fetch text from.}
+}
+\value{
+A character vector containing the extracted text, or \code{NA_character_} if the
+URL is not reachable.
 }
 \description{
-Read item_text via Provided Link in RSS Feed
+This function fetches and reads text content from a URL, extracting and returning the text
+from paragraph tags.
+}
+\examples{
+read_text_via_url("https://example.com")
 }

@@ -2,13 +2,13 @@
 % Please edit documentation in R/01_process_yaml_config.R
 \name{read_field_mapping}
 \alias{read_field_mapping}
-\title{Read Mapping Table for DB and RSS from YAML Config}
+\title{Read Mapping Table for DB and RSS from Configuration}
 \usage{
-read_field_mapping(config_file = "config.yaml")
+read_field_mapping(config)
 }
 \arguments{
-\item{config_file}{(str) name of config file}
+\item{config}{(list) the configuration object}
 }
 \description{
-Read Mapping Table for DB and RSS from YAML Config
+Read Mapping Table for DB and RSS from Configuration
 }

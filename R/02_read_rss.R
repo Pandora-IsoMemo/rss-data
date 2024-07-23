@@ -1,39 +1,177 @@
 #' Read RSS Feeds
+#'
+#' This function reads and processes RSS feeds, extracting specified fields.
+#'
 #' @param feed_url (str) url of the rss feed
-#' @param fields (str) fields to read from the rss feed
+#' @param fields (str) fields to read from the rss feed.
+#' Default is the rss_names from read_field_mapping().
 #' @export
-read_rss_feeds <- function(feed, fields=read_field_mapping()$rss_names) {
-    logging("Reading feed %s.", feed)
-    feed <- tidyfeed(feed$url)
-    feed_columns <- colnames(feed)
-    feed_data <- feed[, feed_columns[feed_columns %in% fields], drop = FALSE]
-    missing_fields <- setdiff(fields, feed_columns)
-    if(length(missing_fields) > 0) {
-      log_warn("Fields are missing: %s.", missing_fields)
+#'
+#' @return A data frame containing the requested fields from the RSS feed.
+#' @examples
+#' read_rss_feeds("https://example.com/rss")
+read_rss_feeds <- function(feed, config) {
+  fields <- read_field_mapping(config)$rss_names
+  rss_field_names <- read_rss_fields(config)
+
+  logging("Reading source feed %s.", feed$url)
+
+  feed <- tidyfeed(feed$url)
+  feed_columns <- colnames(feed)
+  feed_data <- feed[, feed_columns %in% fields, drop = FALSE]
+
+  missing_fields <- setdiff(fields, feed_columns)
+  if (length(missing_fields) > 0) {
+    log_warn("Fields are missing: %s.",
+             paste(missing_fields, collapse = ", "))
+    for (field in missing_fields) {
+      feed_data[[field]] <- NA_character_
     }
-    if("item_text" %in% missing_fields && !("item_link" %in% missing_fields)) {
-      feed_data <- feed_data %>%
-        rowwise() %>%
-        mutate(item_text = read_text_via_url(url=item_link)) %>%
-        ungroup() %>%
-        return()
-      } else {
-        log_warn("Can't read text for %s. item_link and item_text are both missing.", feed)
-      }
+  }
+  if (rss_field_names$text %in% missing_fields &&
+        !(rss_field_names$link %in% missing_fields)) {
+    feed_data <- feed_data %>%
+      rowwise() %>%
+      mutate(!!rss_field_names$text := read_text_via_url(url = !!sym(rss_field_names$link))) %>%
+      ungroup()
+  }
+  return(feed_data)
 }
 
-#' Read item_text via Provided Link in RSS Feed
-#' @param url (str) item_link from the rss feed
+#' Fetch and read text from a URL
+#'
+#' This function fetches and reads text content from a URL, extracting and returning the text
+#' from paragraph tags.
+#'
+#' @param url A string representing the URL to fetch text from.
+#'
+#' @return A character vector containing the extracted text, or \code{NA_character_} if the
+#' URL is not reachable.
 #' @export
+#'
+#' @examples
+#' read_text_via_url("https://example.com")
 read_text_via_url <- function(url) {
   logging("Fetching text from url %s", url)
-  page <- GET(url, timeout(30))
-  page_content <- content(page, as = "text")
-  html <- read_html(page_content)
-  html %>%
-    html_nodes("p") %>%
-    html_text() %>%
-    str_squish() %>%
-    paste(collapse = " ") %>%
-    return()
+
+  if (url_exists(url, timeout(30))) {
+    page <- safe_GET(url, timeout(30))
+
+    if (is.null(page$result) ||
+          ((httr::status_code(page$result) %/% 200) != 1)) {
+      log_warn(
+        "The url %s is not reachable (%s).",
+        url,
+        if (is.null(page$result))
+          "NULL"
+        else
+          httr::status_code(page$result)
+      )
+      return(NA_character_)
+    } else {
+      page_content <- httr::content(page$result, as = "text")
+      html <- read_html(page_content)
+      text <- html %>%
+        html_nodes("p") %>%
+        html_text() %>%
+        str_squish() %>%
+        paste(collapse = " ")
+      return(text)
+    }
+  } else {
+    log_warn("The url %s does not exist or is not reachable.", url)
+    return(NA_character_)
+  }
 }
+
+#' Check if a URL exists and is reachable
+#'
+#' This function performs a HEAD request to check if a URL exists and is reachable.
+#'
+#' @param url A string representing the URL to check.
+#' @param quiet A logical value indicating whether to suppress error messages.
+#' Default is \code{FALSE}.
+#' @param ... Additional arguments passed to the \code{httr::HEAD} function.
+#'
+#' @return \code{TRUE} if the URL exists and is reachable, \code{FALSE} if the URL is not
+#' reachable, and logs a warning message.
+#' @export
+#'
+#' @examples
+#' url_exists("https://example.com")
+url_exists <- function(url, quiet = FALSE, ...) {
+  res <- safe_HEAD(url, ...)
+
+  if (is.null(res$result) ||
+        ((httr::status_code(res$result) %/% 200) != 1)) {
+    log_warn("The url %s is not reachable (%s).",
+             url,
+             httr::status_code(res$result))
+    return(FALSE)
+
+  } else {
+    return(TRUE)
+  }
+}
+
+#' Safely wrap a function to capture errors
+#'
+#' This function wraps another function to safely execute it, capturing any errors that occur.
+#'
+#' @param .f The function to be executed safely.
+#' @param otherwise A default value to return if an error occurs. Default is \code{NULL}.
+#' @param quiet A logical value indicating whether to suppress error messages.
+#' Default is \code{TRUE}.
+#'
+#' @return A function that safely executes the original function.
+#' @export
+#'
+#' @examples
+#' safe_log <- safely(log)
+#' safe_log(10)
+safely <- function(.f,
+                   otherwise = NULL,
+                   quiet = TRUE) {
+  function(...) {
+    capture_error(.f(...), otherwise, quiet)
+  }
+}
+
+#' Capture errors in code execution
+#'
+#' This function executes code and captures any errors that occur, returning a list with the
+#' result and the error.
+#'
+#' @param code The code to be executed.
+#' @param otherwise A default value to return if an error occurs. Default is \code{NULL}.
+#' @param quiet A logical value indicating whether to suppress error messages.
+#' Default is \code{TRUE}.
+#'
+#' @return A list with two elements: \code{result} (the result of the code execution)
+#' and \code{error} (the error that occurred, if any).
+#' @export
+#'
+#' @examples
+#' capture_error(log("a"))
+capture_error <- function(code,
+                          otherwise = NULL,
+                          quiet = TRUE) {
+  tryCatch(
+    list(result = code, error = NULL),
+    error = function(e) {
+      if (!quiet)
+        message("Error: ", e$message)
+
+      list(result = otherwise, error = e)
+    },
+    interrupt = function(e) {
+      stop("Terminated by user", call. = FALSE)
+    }
+  )
+}
+
+# Safely wrapped HEAD and GET functions from httr
+#' @export
+safe_HEAD <- safely(httr::HEAD)
+#' @export
+safe_GET <- safely(httr::GET)
