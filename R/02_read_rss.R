@@ -2,14 +2,11 @@
 #'
 #' This function reads and processes RSS feeds, extracting specified fields.
 #'
-#' @param feed_url (str) url of the rss feed
-#' @param fields (str) fields to read from the rss feed.
-#' Default is the rss_names from read_field_mapping().
+#' @param feed (list) source feed entry from the configuration file.
+#' @param config (list) configuration file with column mapping and rss field names.
 #' @export
 #'
 #' @return A data frame containing the requested fields from the RSS feed.
-#' @examples
-#' read_rss_feeds("https://example.com/rss")
 read_rss_feeds <- function(feed, config) {
   fields <- read_field_mapping(config)$rss_names
   rss_field_names <- read_rss_fields(config)
@@ -48,9 +45,6 @@ read_rss_feeds <- function(feed, config) {
 #' @return A character vector containing the extracted text, or \code{NA_character_} if the
 #' URL is not reachable.
 #' @export
-#'
-#' @examples
-#' read_text_via_url("https://example.com")
 read_text_via_url <- function(url) {
   logging("Fetching text from url %s", url)
 
@@ -96,9 +90,6 @@ read_text_via_url <- function(url) {
 #' @return \code{TRUE} if the URL exists and is reachable, \code{FALSE} if the URL is not
 #' reachable, and logs a warning message.
 #' @export
-#'
-#' @examples
-#' url_exists("https://example.com")
 url_exists <- function(url, quiet = FALSE, ...) {
   res <- safe_HEAD(url, ...)
 
@@ -121,17 +112,15 @@ url_exists <- function(url, quiet = FALSE, ...) {
 #' @param .f The function to be executed safely.
 #' @param otherwise A default value to return if an error occurs. Default is \code{NULL}.
 #' @param quiet A logical value indicating whether to suppress error messages.
+#' @param ... Additional arguments passed to the \code{httr::HEAD} function.
 #' Default is \code{TRUE}.
 #'
 #' @return A function that safely executes the original function.
 #' @export
-#'
-#' @examples
-#' safe_log <- safely(log)
-#' safe_log(10)
 safely <- function(.f,
                    otherwise = NULL,
-                   quiet = TRUE) {
+                   quiet = TRUE,
+                   ...) {
   function(...) {
     capture_error(.f(...), otherwise, quiet)
   }
@@ -150,9 +139,6 @@ safely <- function(.f,
 #' @return A list with two elements: \code{result} (the result of the code execution)
 #' and \code{error} (the error that occurred, if any).
 #' @export
-#'
-#' @examples
-#' capture_error(log("a"))
 capture_error <- function(code,
                           otherwise = NULL,
                           quiet = TRUE) {
@@ -170,8 +156,22 @@ capture_error <- function(code,
   )
 }
 
-# Safely wrapped HEAD and GET functions from httr
+#' Safely Wrapped HEAD Function from httr
+#'
+#' This function is a safely wrapped version of \code{httr::HEAD} using the \code{safely} function.
+#' It captures errors and returns a list with the result and the error.
+#' @param ... Additional arguments passed to the \code{httr::HEAD} function.
+#' @return A function that performs a HEAD request and returns a list with elements
+#' \code{result} and \code{error}.
 #' @export
 safe_HEAD <- safely(httr::HEAD)
+
+#' Safely Wrapped GET Function from httr
+#'
+#' This function is a safely wrapped version of \code{httr::GET} using the \code{safely} function.
+#' It captures errors and returns a list with the result and the error.
+#' @param ... Additional arguments passed to the \code{httr::HEAD} function.
+#' @return A function that performs a GET request and returns a list with elements
+#' \code{result} and \code{error}.
 #' @export
 safe_GET <- safely(httr::GET)

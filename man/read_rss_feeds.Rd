@@ -7,17 +7,13 @@
 read_rss_feeds(feed, config)
 }
 \arguments{
-\item{feed_url}{(str) url of the rss feed}
+\item{feed}{(list) source feed entry from the configuration file.}
 
-\item{fields}{(str) fields to read from the rss feed.
-Default is the rss_names from read_field_mapping().}
+\item{config}{(list) configuration file with column mapping and rss field names.}
 }
 \value{
 A data frame containing the requested fields from the RSS feed.
 }
 \description{
 This function reads and processes RSS feeds, extracting specified fields.
-}
-\examples{
-read_rss_feeds("https://example.com/rss")
 }

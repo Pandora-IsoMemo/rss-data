@@ -21,6 +21,3 @@ reachable, and logs a warning message.
 \description{
 This function performs a HEAD request to check if a URL exists and is reachable.
 }
-\examples{
-url_exists("https://example.com")
-}

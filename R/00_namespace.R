@@ -5,4 +5,5 @@
 #' @importFrom stringr str_squish
 #' @importFrom tidyRSS tidyfeed
 #' @import dplyr
+#' @importFrom rlang :=
 NULL

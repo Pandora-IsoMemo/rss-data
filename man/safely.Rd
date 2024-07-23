@@ -4,14 +4,16 @@
 \alias{safely}
 \title{Safely wrap a function to capture errors}
 \usage{
-safely(.f, otherwise = NULL, quiet = TRUE)
+safely(.f, otherwise = NULL, quiet = TRUE, ...)
 }
 \arguments{
 \item{.f}{The function to be executed safely.}
 
 \item{otherwise}{A default value to return if an error occurs. Default is \code{NULL}.}
 
-\item{quiet}{A logical value indicating whether to suppress error messages.
+\item{quiet}{A logical value indicating whether to suppress error messages.}
+
+\item{...}{Additional arguments passed to the \code{httr::HEAD} function.
 Default is \code{TRUE}.}
 }
 \value{
@@ -19,8 +21,4 @@ A function that safely executes the original function.
 }
 \description{
 This function wraps another function to safely execute it, capturing any errors that occur.
-}
-\examples{
-safe_log <- safely(log)
-safe_log(10)
 }

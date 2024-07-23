@@ -1,6 +1,6 @@
 #' Run feed collector
 #'
-#' @param feeds (list) see result of \code{read_rss_sources()}
+#' @param config_file (str) configuration file
 #'
 #' @export
 main <- function(config_file = "config.yaml") {

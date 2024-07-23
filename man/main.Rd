@@ -7,7 +7,7 @@
 main(config_file = "config.yaml")
 }
 \arguments{
-\item{feeds}{(list) see result of \code{read_rss_sources()}}
+\item{config_file}{(str) configuration file}
 }
 \description{
 Run feed collector

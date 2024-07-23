@@ -22,6 +22,3 @@ and \code{error} (the error that occurred, if any).
 This function executes code and captures any errors that occur, returning a list with the
 result and the error.
 }
-\examples{
-capture_error(log("a"))
-}

@@ -17,7 +17,8 @@ Imports:
   httr,
   rvest,
   stringr,
-  dplyr
+  dplyr,
+  rlang
 Suggests: lintr, testthat
 Encoding: UTF-8
 LazyData: true

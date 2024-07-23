@@ -17,6 +17,3 @@ URL is not reachable.
 This function fetches and reads text content from a URL, extracting and returning the text
 from paragraph tags.
 }
-\examples{
-read_text_via_url("https://example.com")
-}
