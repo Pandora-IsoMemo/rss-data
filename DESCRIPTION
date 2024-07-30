@@ -11,7 +11,8 @@ Description: The rssData package is designed to manage and store daily RSS feed 
   to read and process RSS sources.
 License: GPL (>= 3)
 Imports:
-  futile.logger, 
+  futile.logger,
+  dbtools,
   tidyRSS,
   yaml,
   httr,
@@ -19,8 +20,11 @@ Imports:
   stringr,
   dplyr,
   rlang,
-  dbtools
-Suggests: lintr, testthat
+  RMySQL
+Suggests: 
+    lintr,
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
+Config/testthat/edition: 3
