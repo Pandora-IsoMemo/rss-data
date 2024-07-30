@@ -15,18 +15,24 @@ sources:
 
 
 # Mapping for all columns of the target table on the database
-# Please, add columns as needed (e.g. `date_last_updated`, `id`, ...)!
-fieldMapping:
+# Add columns as needed
+# Only change the values (right from the colon), not the keys!
+dbMapping:
+  source_id: "source_id" # generated here
+  source: "source"
+  title: "title"
+  link: "link"
+  text: "text"
+  timestamp_feed_updated: "ts_feed_updated"
+  timestamp_item_published: "ts_item_published"
+# Mapping for all fields of the rss sources
+# Add columns as needed
+# Only change the values (right from the colon), not the keys!
+rssMapping:
   source_id: "source_id" # generated here
   source: "feed_title"
   title: "item_title"
   link: "item_link"
   text: "item_text"
-  ts_feed_updated: "feed_last_build_date"
-  ts_item_published: "item_pub_date"
-# specify how the fields with the text and the field with the url to text are called
-# only change the values (left from the :), keys stay fixed
-# !! must be the same as in fieldMapping !!
-rssFields:
-  text: "item_text"
-  link: "item_link"
+  timestamp_feed_updated: "feed_last_build_date"
+  timestamp_item_published: "item_pub_date"

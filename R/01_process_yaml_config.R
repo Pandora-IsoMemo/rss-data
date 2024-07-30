@@ -11,15 +11,11 @@ load_yaml_config <- function(config_file = "config.yaml") {
 #' @param config (list) the configuration object
 #' @export
 read_field_mapping <- function(config) {
-  mapping <- config$fieldMapping
-  return(
-    data.frame(
-      db_names = names(mapping),
-      rss_names = unlist(mapping),
-      stringsAsFactors = FALSE,
-      row.names = NULL
-    )
-  )
+  return(cbind(
+    db = unlist(config$dbMapping),
+    rss = unlist(config$rssMapping)
+  ) %>%
+    data.frame())
 }
 
 #' Read RSS Sources from Configuration

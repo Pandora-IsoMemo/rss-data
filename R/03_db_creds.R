@@ -23,14 +23,16 @@
 #'
 #' @export
 credentials <- function() {
-  return(Credentials(
-    dbtools::MySQL,
-    user = Sys.getenv("DB_USER"),
-    password = Sys.getenv("DB_PASSWORD"),
-    host = Sys.getenv("DB_HOST"),
-    dbname = Sys.getenv("DB_NAME"),
-    port = as.numeric(Sys.getenv("DB_PORT"))
-  ))
+  return(
+      Credentials(
+        drv = RMySQL::MySQL,
+        user = Sys.getenv("DB_USER"),
+        password = Sys.getenv("DB_PASSWORD"),
+        dbname = Sys.getenv("DB_NAME"),
+        host = Sys.getenv("DB_HOST"),
+        port = as.numeric(Sys.getenv("DB_PORT"))
+      )
+  )
 }
 
 #' Update Database with New RSS Feed Data
@@ -41,19 +43,31 @@ credentials <- function() {
 #'
 #' @param tibble A tibble containing RSS feed data with unique `source_id`
 #'   and `feed_last_build_date`.
-#' @param con A DBI connection object to the MariaDB database.
+#' @param config (list) configuration file with column mapping and rss field names.
 #' @export
-update_database <- function(tibble, con) {
-    source_id <- unique(tibble$source_id)
-    feed_last_build_date_r <- max(tibble$feed_last_build_date)
+update_database <- function(tibble, config) {
+  mapping <- read_field_mapping(config)
+  source_id <- unique(tibble$source_id)
+  timestamp_feed_updated_db <- mapping["timestamp_feed_updated", ]$db
+  timestamp_feed_updated_rss <- mapping["timestamp_feed_updated", ]$rss
+  max_timestamp_feed_updated_rss <- max(tibble[[timestamp_feed_updated_rss]])
 
-    query <- sprintf("SELECT MAX(feed_last_build_date) AS max_date FROM rss_feed_text WHERE source_id = %d", source_id)
-    feed_last_build_date_db <- sendQuery(con, query)$max_date
+  query <- sprintf(
+    "SELECT MAX(%s) AS max_date FROM mpiRss.feed_text WHERE source_id = %s;",
+    timestamp_feed_updated_db,
+    source_id
+  )
+  con <- credentials()
+  max_timestamp_feed_updated_db <- sendQuery(con, query)$max_date
 
-    if (is.na(feed_last_build_date_db) || feed_last_build_date_r > feed_last_build_date_db) {
-      logging("Updating data for source_id %s.", source_id)#
-      sendData(con, data = tibble, table = "feed_text", mode = "insert")
-    } else {
-      logging("Nothing to update for source_id %s.", source_id)
-    }
+  if (is.na(max_timestamp_feed_updated_db) ||
+      max_timestamp_feed_updated_rss > max_timestamp_feed_updated_db) {
+    logging("Updating data for source_id %s.", source_id)
+    rename_vector <- setNames(as.character(mapping$rss), mapping$db)
+    tibble <- tibble %>%
+      rename(!!!rename_vector)
+    sendData(con, tibble, table = "mpiRss.feed_text", mode = "replace")
+  } else {
+    logging("Nothing to update for source_id %s.", source_id)
+  }
 }

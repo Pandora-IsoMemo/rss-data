@@ -8,17 +8,15 @@
 #'
 #' @return A data frame containing the requested fields from the RSS feed.
 read_rss_feeds <- function(source, config) {
-  fields <- read_field_mapping(config)$rss_names
-  rss_field_names <- read_rss_fields(config)
-
+  mapping <- read_field_mapping(config)
   logging("Reading source feed %s.", source$url)
 
   feed <- tidyfeed(source$url)
   feed[["source_id"]] <- source$id
   feed_columns <- colnames(feed)
-  feed_data <- feed[, feed_columns %in% fields, drop = FALSE]
+  feed_data <- feed[, feed_columns %in% mapping$rss, drop = FALSE]
 
-  missing_fields <- setdiff(fields, feed_columns)
+  missing_fields <- setdiff(mapping$rss, feed_columns)
   if (length(missing_fields) > 0) {
     log_warn("Fields are missing: %s.",
              paste(missing_fields, collapse = ", "))
@@ -26,11 +24,11 @@ read_rss_feeds <- function(source, config) {
       feed_data[[field]] <- NA_character_
     }
   }
-  if (rss_field_names$text %in% missing_fields &&
-        !(rss_field_names$link %in% missing_fields)) {
+  if (mapping["text", ]$rss %in% missing_fields &&
+        !(mapping["link", ]$rss %in% missing_fields)) {
     feed_data <- feed_data %>%
       rowwise() %>%
-      mutate(!!rss_field_names$text := read_text_via_url(url = !!sym(rss_field_names$link))) %>%
+      mutate(!!mapping["text", ]$rss := read_text_via_url(url = !!sym(mapping["link", ]$rss))) %>%
       ungroup()
   }
   return(feed_data)
@@ -74,7 +72,6 @@ read_text_via_url <- function(url) {
       return(text)
     }
   } else {
-    log_warn("The url %s does not exist or is not reachable.", url)
     return(NA_character_)
   }
 }
@@ -94,11 +91,9 @@ read_text_via_url <- function(url) {
 url_exists <- function(url, quiet = FALSE, ...) {
   res <- safe_HEAD(url, ...)
 
-  if (is.null(res$result) ||
-        ((httr::status_code(res$result) %/% 200) != 1)) {
-    log_warn("The url %s is not reachable (%s).",
-             url,
-             httr::status_code(res$result))
+  if ((is.null(res$result)) || ((httr::status_code(res$result) %/% 200) != 1)) {
+    log_warn("The url %s is not reachable.",
+             url)
     return(FALSE)
 
   } else {
