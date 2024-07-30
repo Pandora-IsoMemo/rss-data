@@ -4,4 +4,6 @@ ADD . .
 
 RUN installPackage
 
+RUN R -e "devtools::test()"
+
 CMD ["Rscript", "inst/RScripts/exec_main.R"]
