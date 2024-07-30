@@ -4,13 +4,13 @@
 \alias{update_database}
 \title{Update Database with New RSS Feed Data}
 \usage{
-update_database(tibble, con)
+update_database(tibble, config)
 }
 \arguments{
 \item{tibble}{A tibble containing RSS feed data with unique `source_id`
 and `feed_last_build_date`.}
 
-\item{con}{A DBI connection object to the MariaDB database.}
+\item{config}{(list) configuration file with column mapping and rss field names.}
 }
 \description{
 This function updates the database with new RSS feed data from a list of tibbles.

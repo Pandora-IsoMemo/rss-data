@@ -2,7 +2,9 @@ library(testthat)
 
 # Test for load_yaml_config
 test_that("load_yaml_config loads YAML file correctly", {
-  config <- load_yaml_config(system.file("config.yaml", package = "rssData"))
+  logging(paste0("wd:", getwd()))
+  logging(paste0("files:", list.files(path=getwd())))
+  config <- load_yaml_config("test_config.yaml")
   expect_true(is.list(config))
   expect_equal(names(config), c("sources", "dbMapping", "rssMapping"))
 
@@ -10,7 +12,7 @@ test_that("load_yaml_config loads YAML file correctly", {
 
 # Test for read_field_mapping
 test_that("read_field_mapping returns correct mapping table", {
-  config <- load_yaml_config(system.file("config.yaml", package = "rssData"))
+  config <- load_yaml_config("test_config.yaml")
   mapping <- read_field_mapping(config)
   expect_true(is.data.frame(mapping))
   expect_equal(ncol(mapping), 2)

@@ -2,7 +2,7 @@ library(testthat)
 
 # Test for read_rss_feeds
 test_that("read_rss_feeds reads and processes RSS feeds correctly", {
-  config <- load_yaml_config(system.file("config.yaml", package = "rssData"))
+  config <- load_yaml_config("test_config.yaml")
 
   source <- list(id = 1, url = "http://rss.cnn.com/rss/edition_world.rss")
 

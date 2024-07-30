@@ -5,7 +5,7 @@
 #' @importFrom rvest read_html html_nodes html_text
 #' @importFrom stringr str_squish
 #' @importFrom tidyRSS tidyfeed
+#' @importFrom stats setNames
 #' @import dplyr
-#' @import RMariaDB
 #' @importFrom rlang :=
 NULL
