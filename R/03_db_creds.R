@@ -24,14 +24,14 @@
 #' @export
 credentials <- function() {
   return(
-      Credentials(
-        drv = RMySQL::MySQL,
-        user = Sys.getenv("DB_USER"),
-        password = Sys.getenv("DB_PASSWORD"),
-        dbname = Sys.getenv("DB_NAME"),
-        host = Sys.getenv("DB_HOST"),
-        port = as.numeric(Sys.getenv("DB_PORT"))
-      )
+    Credentials(
+      drv = RMySQL::MySQL,
+      user = Sys.getenv("DB_USER"),
+      password = Sys.getenv("DB_PASSWORD"),
+      dbname = Sys.getenv("DB_NAME"),
+      host = Sys.getenv("DB_HOST"),
+      port = as.numeric(Sys.getenv("DB_PORT"))
+    )
   )
 }
 
@@ -48,6 +48,7 @@ credentials <- function() {
 update_database <- function(tibble, config) {
   mapping <- read_field_mapping(config)
   source_id <- unique(tibble$source_id)
+  logging("Start to update databse for %s.", source_id)
   timestamp_feed_updated_db <- mapping["timestamp_feed_updated", ]$db
   timestamp_feed_updated_rss <- mapping["timestamp_feed_updated", ]$rss
   max_timestamp_feed_updated_rss <- max(tibble[[timestamp_feed_updated_rss]])

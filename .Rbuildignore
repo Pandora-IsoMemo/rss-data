@@ -4,3 +4,4 @@ Dockerfile
 Jenkinsfile
 ^config.yaml
 .Renviron_template
+.aws
