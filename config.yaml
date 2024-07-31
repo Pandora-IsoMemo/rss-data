@@ -23,7 +23,7 @@ dbMapping:
   title: "title"
   link: "link"
   text: "text"
-  timestamp_feed_updated: "ts_feed_updated"
+  timestamp_feed_updated: "ts_last_feed_updated"
   timestamp_item_published: "ts_item_published"
 # Mapping for all fields of the rss sources
 # Add columns as needed
