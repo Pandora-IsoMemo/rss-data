@@ -19,6 +19,17 @@ pipeline {
                 '''
             }
         }
+        stage('ETL') {
+            steps {
+                sh '''
+                docker build -t tmp-$CUR_PROJ-$TMP_SUFFIX .
+                docker run --rm --network host \
+                 --env-file $CREDENTIALS \
+                 tmp-$CUR_PROJ-$TMP_SUFFIX
+                docker rmi tmp-$CUR_PROJ-$TMP_SUFFIX
+                '''
+            }
+        }
 
     }
 }
