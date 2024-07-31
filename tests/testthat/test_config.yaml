@@ -1,35 +1,22 @@
-# RSS sources
 sources:
   Source_1:
     url: "http://rss.cnn.com/rss/edition_world.rss"
-    name: "CNN" # not used
-    description: "Edition World" # not used
-    category: "Example 1" # not used
     id: 1
   Source_2:
     url: "http://feeds.bbci.co.uk/news/world/rss.xml"
-    name: "BBC"
-    description: "News World"
-    category: "Example 2"
     id: 2
 
-
-# Mapping for all columns of the target table on the database
-# Add columns as needed
-# Only change the values (right from the colon), not the keys!
 dbMapping:
-  source_id: "source_id" # generated here
+  source_id: "source_id"
   source: "source"
   title: "title"
   link: "link"
   text: "text"
   timestamp_feed_updated: "ts_feed_updated"
   timestamp_item_published: "ts_item_published"
-# Mapping for all fields of the rss sources
-# Add columns as needed
-# Only change the values (right from the colon), not the keys!
+
 rssMapping:
-  source_id: "source_id" # generated here
+  source_id: "source_id"
   source: "feed_title"
   title: "item_title"
   link: "item_link"

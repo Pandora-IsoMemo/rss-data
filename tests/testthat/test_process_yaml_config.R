@@ -2,8 +2,6 @@ library(testthat)
 
 # Test for load_yaml_config
 test_that("load_yaml_config loads YAML file correctly", {
-  logging(paste0("wd:", getwd()))
-  logging(paste0("files:", list.files(path=getwd())))
   config <- load_yaml_config("test_config.yaml")
   expect_true(is.list(config))
   expect_equal(names(config), c("sources", "dbMapping", "rssMapping"))
