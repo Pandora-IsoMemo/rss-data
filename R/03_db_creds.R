@@ -54,7 +54,7 @@ update_database <- function(tibble, config) {
   max_timestamp_feed_updated_rss <- max(tibble[[timestamp_feed_updated_rss]])
 
   query <- sprintf(
-    "SELECT MAX(%s) AS max_date FROM mpiRss.feed_text WHERE source_id = %s;",
+    "SELECT MAX(%s) AS max_date FROM feed_text WHERE source_id = %s;",
     timestamp_feed_updated_db,
     source_id
   )
@@ -67,7 +67,7 @@ update_database <- function(tibble, config) {
     rename_vector <- setNames(as.character(mapping$rss), mapping$db)
     tibble <- tibble %>%
       rename(!!!rename_vector)
-    sendData(con, tibble, table = "mpiRss.feed_text", mode = "replace")
+    sendData(con, tibble, table = "feed_text", mode = "replace")
   } else {
     logging("Nothing to update for source_id %s.", source_id)
   }
