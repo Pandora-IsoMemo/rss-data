@@ -48,7 +48,7 @@ credentials <- function() {
 update_database <- function(tibble, config) {
   mapping <- read_field_mapping(config)
   source_id <- unique(tibble$source_id)
-  logging("Start to update databse for %s.", source_id)
+  logging("Start to update database for source_id %s.", source_id)
   timestamp_feed_updated_db <- mapping["timestamp_feed_updated", ]$db
   timestamp_feed_updated_rss <- mapping["timestamp_feed_updated", ]$rss
   max_timestamp_feed_updated_rss <- max(tibble[[timestamp_feed_updated_rss]])
@@ -63,7 +63,7 @@ update_database <- function(tibble, config) {
 
   if (is.na(max_timestamp_feed_updated_db) ||
       max_timestamp_feed_updated_rss > max_timestamp_feed_updated_db) {
-    logging("Updating data for source_id %s.", source_id)
+    logging("Sending data for source_id %s.", source_id)
     rename_vector <- setNames(as.character(mapping$rss), mapping$db)
     tibble <- tibble %>%
       rename(!!!rename_vector)
