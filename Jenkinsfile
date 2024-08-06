@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    triggers {
-        cron('H 7 * * *')
-    }
+//    triggers {
+//        cron('H 7 * * *')
+//    }
     options { disableConcurrentBuilds() }
     environment {
         CUR_PROJ = 'rss-data' // github repo name
