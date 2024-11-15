@@ -1,18 +1,123 @@
 # RSS sources
 sources:
-  Source_1:
+  Source_0:
     url: "http://rss.cnn.com/rss/edition_world.rss"
     name: "CNN" # not used
     description: "Edition World" # not used
     category: "Example 1" # not used
     id: 1
+
+  Source_1:
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+    name: "New York Times"
+    description: "World News"
+    category: "International"
+    id: 1
+
   Source_2:
-    url: "http://feeds.bbci.co.uk/news/world/rss.xml"
-    name: "BBC"
-    description: "News World"
-    category: "Example 2"
+    url: "https://moxie.foxnews.com/google-publisher/world.xml"
+    name: "Fox News"
+    description: "World News"
+    category: "International"
     id: 2
 
+  Source_3:
+    url: "http://feeds.bbci.co.uk/news/world/rss.xml"
+    name: "BBC News"
+    description: "World News"
+    category: "International"
+    id: 3
+
+  Source_4:
+    url: "https://www.theguardian.com/world/rss"
+    name: "The Guardian"
+    description: "World News"
+    category: "International"
+    id: 4
+
+  Source_5:
+    url: "https://www.aljazeera.com/xml/rss/all.xml"
+    name: "Al Jazeera"
+    description: "All News"
+    category: "International"
+    id: 5
+
+  Source_6:
+    url: "https://timesofindia.indiatimes.com/rssfeeds/296589292.cms"
+    name: "Times of India"
+    description: "World News"
+    category: "International"
+    id: 6
+
+  Source_7:
+    url: "https://www.rt.com/rss/"
+    name: "RT"
+    description: "All News"
+    category: "International"
+    id: 7
+
+  Source_8:
+    url: "https://rss.dw.com/xml/rss-en-all"
+    name: "DW News"
+    description: "All News"
+    category: "International"
+    id: 8
+
+  Source_9:
+    url: "https://en.mehrnews.com/rss/tp/561"
+    name: "Mehr News"
+    description: "Top Stories"
+    category: "International"
+    id: 9
+
+  Source_10:
+    url: "http://www.chinadaily.com.cn/rss/world_rss.xml"
+    name: "China Daily"
+    description: "World News"
+    category: "International"
+    id: 10
+
+  Source_11:
+    url: "https://www.scmp.com/rss/91/feed"
+    name: "South China Morning Post"
+    description: "World News"
+    category: "International"
+    id: 11
+
+  Source_12:
+    url: "https://www.telesurenglish.net/pages/rss.html"
+    name: "Telesur"
+    description: "World News"
+    category: "International"
+    id: 12
+
+  Source_13:
+    url: "https://www.france24.com/en/rss"
+    name: "France 24"
+    description: "Top Stories"
+    category: "International"
+    id: 13
+
+  Source_14:
+    url: "https://www.news24.com/World/Rss"
+    name: "News24"
+    description: "World News"
+    category: "International"
+    id: 14
+
+  Source_15:
+    url: "https://www.sowetanlive.co.za/rss/?section=news"
+    name: "Sowetan"
+    description: "News"
+    category: "International"
+    id: 15
+
+  Source_16:
+    url: "https://punchng.com/feed/"
+    name: "The Punch"
+    description: "All News"
+    category: "International"
+    id: 16
 
 # Mapping for all columns of the target table on the database
 # Add columns as needed
@@ -21,6 +126,7 @@ dbMapping:
   source_id: "source_id" # generated here
   source: "source"
   title: "title"
+  author:"author"
   link: "link"
   text: "text"
   timestamp_feed_updated: "ts_last_feed_updated"
@@ -32,6 +138,7 @@ rssMapping:
   source_id: "source_id" # generated here
   source: "feed_title"
   title: "item_title"
+  author:"author"
   link: "item_link"
   text: "item_text"
   timestamp_feed_updated: "feed_last_build_date"
