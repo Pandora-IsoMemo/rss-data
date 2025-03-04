@@ -2,31 +2,25 @@
 % Please edit documentation in R/03_db_creds.R
 \name{credentials}
 \alias{credentials}
-\title{Read Database Credentials from .Renviron}
+\title{Read MongoDB Credentials from .Renviron}
 \usage{
 credentials()
 }
 \value{
-A list containing the database credentials:
-\itemize{
-  \item \code{user}: The username for the database.
-  \item \code{password}: The password for the database.
-  \item \code{host}: The host address of the database.
-  \item \code{dbname}: The name of the database.
-  \item \code{port}: The port number of the database.
-}
+A mongo connection object that can be used to interact with the MongoDB database.
 }
 \description{
-This function reads database credentials from environment variables defined in the
-.Renviron file and returns a credentials object.
+This function reads MongoDB database credentials from environment variables defined in the
+.Renviron file and returns a mongo connection object.
 }
 \details{
 The .Renviron file should contain the following environment variables:
 \itemize{
-  \item \code{DB_USER}: The username for the database.
-  \item \code{DB_PASSWORD}: The password for the database.
-  \item \code{DB_HOST}: The host address of the database.
-  \item \code{DB_NAME}: The name of the database.
-  \item \code{DB_PORT}: The port number of the database.
+  \item \code{DB_USER}: The username for the MongoDB database.
+  \item \code{DB_PASSWORD}: The password for the MongoDB database, please use percent encoding
+    here (https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding).
+  \item \code{DB_HOST}: The host address of the MongoDB server.
+  \item \code{DB_NAME}: The name of the MongoDB database.
+  \item \code{DB_PORT}: The port number of the MongoDB server.
 }
 }

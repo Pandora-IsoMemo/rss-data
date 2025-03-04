@@ -1,7 +1,7 @@
 Package: rssData
 Type: Package
 Title: Saving RSS fetched text in a central database
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Sarah", "Wagner", email = "sarah.wagner@inwt-statistics.de", role = c("aut", "cre"))
     )
@@ -12,7 +12,6 @@ Description: The rssData package is designed to manage and store daily RSS feed 
 License: GPL (>= 3)
 Imports:
   futile.logger,
-  dbtools,
   tidyRSS,
   yaml,
   httr,
@@ -20,11 +19,11 @@ Imports:
   stringr,
   dplyr,
   rlang,
-  RMySQL
+  mongolite
 Suggests: 
     lintr,
     testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
