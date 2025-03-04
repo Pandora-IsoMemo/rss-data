@@ -105,7 +105,6 @@ dbMapping:
   source_id: "source_id" # generated here
   source: "source"
   title: "title"
-  author: "author"
   link: "link"
   text: "text"
   timestamp_feed_updated: "ts_last_feed_updated"
@@ -117,7 +116,6 @@ rssMapping:
   source_id: "source_id" # generated here
   source: "feed_title"
   title: "item_title"
-  author: "author"
   link: "item_link"
   text: "item_text"
   timestamp_feed_updated: "feed_last_build_date"
