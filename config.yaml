@@ -85,39 +85,18 @@ sources:
     id: 12
 
   Source_13:
-    url: "https://www.telesurenglish.net/pages/rss.html"
-    name: "Telesur"
-    description: "World News"
-    category: "International"
-    id: 13
-
-  Source_14:
     url: "https://www.france24.com/en/rss"
     name: "France 24"
     description: "Top Stories"
     category: "International"
-    id: 14
+    id: 13
 
-  Source_15:
-    url: "https://www.news24.com/World/Rss"
-    name: "News24"
-    description: "World News"
-    category: "International"
-    id: 15
-
-  Source_16:
-    url: "https://www.sowetanlive.co.za/rss/?section=news"
-    name: "Sowetan"
-    description: "News"
-    category: "International"
-    id: 16
-
-  Source_17:
+  Source_14:
     url: "https://punchng.com/feed/"
     name: "The Punch"
     description: "All News"
     category: "International"
-    id: 17
+    id: 14
 
 # Mapping for all columns of the target table on the database
 # Add columns as needed
