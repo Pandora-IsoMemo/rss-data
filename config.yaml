@@ -71,32 +71,25 @@ sources:
     id: 10
 
   Source_11:
-    url: "http://www.chinadaily.com.cn/rss/world_rss.xml"
-    name: "China Daily"
+    url: "https://www.scmp.com/rss/91/feed"
+    name: "South China Morning Post"
     description: "World News"
     category: "International"
     id: 11
 
   Source_12:
-    url: "https://www.scmp.com/rss/91/feed"
-    name: "South China Morning Post"
-    description: "World News"
-    category: "International"
-    id: 12
-
-  Source_13:
     url: "https://www.france24.com/en/rss"
     name: "France 24"
     description: "Top Stories"
     category: "International"
-    id: 13
+    id: 12
 
-  Source_14:
+  Source_13:
     url: "https://punchng.com/feed/"
     name: "The Punch"
     description: "All News"
     category: "International"
-    id: 14
+    id: 13
 
 # Mapping for all columns of the target table on the database
 # Add columns as needed
