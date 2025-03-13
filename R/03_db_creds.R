@@ -59,8 +59,12 @@ update_database <- function(tibble, config) {
     source_id
   )
   con <- credentials()
-  max_timestamp_feed_updated_db <- sendQuery(con, query)$max_date
-
+  result <- sendQuery(con, query)
+  if (is.data.frame(result) && "max_date" %in% colnames(result)) {
+    max_timestamp_feed_updated_db <- result$max_date[1]
+  } else {
+    max_timestamp_feed_updated_db <- NA
+  }
   if (is.na(max_timestamp_feed_updated_db) ||
       max_timestamp_feed_updated_rss > max_timestamp_feed_updated_db) {
     logging("Sending data for source_id %s.", source_id)
