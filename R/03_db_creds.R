@@ -59,11 +59,18 @@ update_database <- function(tibble, config) {
     source_id
   )
   con <- credentials()
-  result <- sendQuery(con, query)
-  if (is.data.frame(result) && "max_date" %in% colnames(result)) {
-    max_timestamp_feed_updated_db <- result$max_date[1]
-  } else {
+  result <- tryCatch({
+    sendQuery(con, query)
+  }, error = function(e) {
+    logging("Database query failed: %s", e$message)
+    return(NULL)
+  })
+
+  if (is.null(result) || !is.data.frame(result) || !"max_date" %in% colnames(result)) {
+    logging("Query result is invalid or missing 'max_date'. Setting max_timestamp_feed_updated_db to NA.")
     max_timestamp_feed_updated_db <- NA
+  } else {
+    max_timestamp_feed_updated_db <- result$max_date[1]
   }
   if (is.na(max_timestamp_feed_updated_db) ||
       max_timestamp_feed_updated_rss > max_timestamp_feed_updated_db) {
