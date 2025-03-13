@@ -49,12 +49,12 @@ sources:
     category: "International"
     id: 7
 
-  Source_8:
-    url: "https://www.rt.com/rss/"
-    name: "RT"
-    description: "All News"
-    category: "International"
-    id: 8
+  # Source_8:
+  #   url: "https://www.rt.com/rss/"
+  #   name: "RT"
+  #   description: "All News"
+  #   category: "International"
+  #   id: 8
 
   Source_9:
     url: "https://rss.dw.com/xml/rss-en-all"
