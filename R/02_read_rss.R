@@ -32,10 +32,10 @@ read_rss_feeds <- function(source, config) {
       ungroup()
   }
   feed_data <- feed_data %>%
-    mutate(feed_last_build_date = if_else(
-      is.na(feed_last_build_date),
-      as.POSIXct(max(item_pub_date, na.rm = TRUE)),
-      as.POSIXct(feed_last_build_date)
+    mutate(!!sym("feed_last_build_date") := if_else(
+      is.na(!!sym("feed_last_build_date")),
+      as.POSIXct(max(!!sym("item_pub_date"), na.rm = TRUE)),
+      as.POSIXct(!!sym("feed_last_build_date"))
     ))
   return(feed_data)
 }
