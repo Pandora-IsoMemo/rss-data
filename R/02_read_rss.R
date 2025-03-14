@@ -31,6 +31,12 @@ read_rss_feeds <- function(source, config) {
       mutate(!!mapping["text", ]$rss := read_text_via_url(url = !!sym(mapping["link", ]$rss))) %>%
       ungroup()
   }
+  feed_data <- feed_data %>%
+    mutate(!!sym("feed_last_build_date") := if_else(
+      is.na(!!sym("feed_last_build_date")),
+      as.POSIXct(max(!!sym("item_pub_date"), na.rm = TRUE)),
+      as.POSIXct(!!sym("feed_last_build_date"))
+    ))
   return(feed_data)
 }
 
