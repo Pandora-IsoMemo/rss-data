@@ -26,7 +26,7 @@ credentials <- function() {
     Sys.getenv("DB_NAME")
   )
 
-  return(mongo(url = URI))
+  return(mongo(collection = Sys.getenv("DB_COLLECTION"), db = Sys.getenv("DB_NAME"), url = URI))
 }
 
 

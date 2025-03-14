@@ -6,6 +6,7 @@
 #' @importFrom stringr str_squish
 #' @importFrom tidyRSS tidyfeed
 #' @importFrom stats setNames
+#' @importFrom mongolite mongo
 #' @import dplyr
 #' @importFrom rlang :=
 NULL
