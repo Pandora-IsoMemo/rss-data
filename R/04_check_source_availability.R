@@ -31,7 +31,7 @@ check_source_availability <- function() {
   if (nrow(stale) > 0) {
     stop(
       sprintf(
-        "❌ ERROR: %d source(s) are outdated (no update in the last ~2 weeks). Affected source_ids: %s",
+        "ERROR: %d source(s) are outdated (no update in the last ~2 weeks). Affected source_ids: %s",
         nrow(stale),
         paste(stale$source_id, collapse = ", ")
       )

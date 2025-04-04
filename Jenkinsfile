@@ -23,6 +23,7 @@ pipeline {
             }
         }
         stage('ETL') {
+            when  { branch 'main' }
             steps {
                 sh '''
                 docker build -t tmp-$CUR_PROJ-$TMP_SUFFIX .
