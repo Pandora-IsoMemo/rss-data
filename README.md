@@ -1,4 +1,4 @@
-# RSS-DATA: RSS Feed Collector for MongoDB
+# rssData: RSS Feed Collector for MongoDB
 
 This R package provides a full pipeline to read, process, and store RSS feed content in a MongoDB database. It uses a YAML configuration file to define data sources, map RSS fields to database fields, and manage credentials securely via environment variables.
 
