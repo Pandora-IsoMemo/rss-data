@@ -49,47 +49,33 @@ sources:
     category: "International"
     id: 7
 
-  # Source_8:
-  #   url: "https://www.rt.com/rss/"
-  #   name: "RT"
-  #   description: "All News"
-  #   category: "International"
-  #   id: 8
-
-  Source_9:
+  Source_8:
     url: "https://rss.dw.com/xml/rss-en-all"
     name: "DW News"
     description: "All News"
     category: "International"
-    id: 9
+    id: 8
 
-  Source_10:
+  Source_9:
     url: "https://en.mehrnews.com/rss/tp/561"
     name: "Mehr News"
     description: "Top Stories"
     category: "International"
-    id: 10
+    id: 9
 
-  Source_11:
+  Source_10:
     url: "https://www.scmp.com/rss/91/feed"
     name: "South China Morning Post"
     description: "World News"
     category: "International"
-    id: 11
+    id: 10
 
-  Source_12:
+  Source_11:
     url: "https://www.france24.com/en/rss"
     name: "France 24"
     description: "Top Stories"
     category: "International"
-    id: 12
-
-  Source_13:
-    url: "https://punchng.com/feed/"
-    name: "The Punch"
-    description: "All News"
-    category: "International"
-    id: 13
+    id: 11
 
 # Mapping for all columns of the target table on the database
 # Add columns as needed
