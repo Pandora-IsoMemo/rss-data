@@ -64,18 +64,11 @@ sources:
     id: 9
 
   Source_10:
-    url: "https://www.scmp.com/rss/91/feed"
-    name: "South China Morning Post"
-    description: "World News"
-    category: "International"
-    id: 10
-
-  Source_11:
     url: "https://www.france24.com/en/rss"
     name: "France 24"
     description: "Top Stories"
     category: "International"
-    id: 11
+    id: 10
 
 # Mapping for all columns of the target table on the database
 # Add columns as needed
