@@ -8,7 +8,7 @@ test_that("read_rss_feeds reads and processes RSS feeds correctly", {
 
   feed_data <- read_rss_feeds(source, config)
   expect_true(is.data.frame(feed_data))
-  expect_equal(ncol(feed_data), 7)
+  expect_equal(ncol(feed_data), 9)
   expect_true(nrow(feed_data) >= 1)
 })
 
