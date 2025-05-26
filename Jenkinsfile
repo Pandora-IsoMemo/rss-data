@@ -1,8 +1,8 @@
 pipeline {
     agent any
-//    triggers {
-//        cron('H 7 * * *')
-//    }
+    triggers {
+        cron('H 7 * * *')
+    }
     options { disableConcurrentBuilds() }
     environment {
         CUR_PROJ = 'rss-data' // github repo name
@@ -23,6 +23,7 @@ pipeline {
             }
         }
         stage('ETL') {
+            when  { branch 'main' }
             steps {
                 sh '''
                 docker build -t tmp-$CUR_PROJ-$TMP_SUFFIX .

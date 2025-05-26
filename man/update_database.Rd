@@ -2,7 +2,7 @@
 % Please edit documentation in R/03_db_creds.R
 \name{update_database}
 \alias{update_database}
-\title{Update Database with New RSS Feed Data}
+\title{Update MongoDB with New RSS Feed Data}
 \usage{
 update_database(tibble, config)
 }
@@ -10,10 +10,10 @@ update_database(tibble, config)
 \item{tibble}{A tibble containing RSS feed data with unique `source_id`
 and `feed_last_build_date`.}
 
-\item{config}{(list) configuration file with column mapping and rss field names.}
+\item{config}{(list) Configuration file with column mapping and RSS field names.}
 }
 \description{
-This function updates the database with new RSS feed data from a list of tibbles.
+This function updates a MongoDB collection with new RSS feed data from a tibble.
 For each tibble, it compares the `feed_last_build_date` with the corresponding
-date in the database and updates the database if the tibble contains newer data.
+date in the database and updates the collection if the tibble contains newer data.
 }

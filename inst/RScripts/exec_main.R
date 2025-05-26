@@ -11,4 +11,6 @@ sessionInfo()
 # 01 Start RSS Collector -------------------------------------------------------
 status <- main()
 
+check_source_availability()
+
 q(save = "no", status = status)

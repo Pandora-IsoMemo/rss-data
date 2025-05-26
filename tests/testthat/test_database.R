@@ -12,5 +12,5 @@ test_that("environment variables for DB are set and not empty", {
 
 test_that("db connection can be established", {
   con <- credentials()
-  expect_true(testConnection(con))
+  expect_true(class(con)[1] == "mongo")
 })
