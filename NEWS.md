@@ -1,4 +1,4 @@
-# rssData 0.3.0
+# rssData 0.2.1
 
 ## Updates
 - **RSS Sources**: Source 1 has been inactivated because it does not deliver data updates. 
