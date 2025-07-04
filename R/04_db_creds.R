@@ -49,7 +49,7 @@ update_database <- function(tibble, config) {
   max_timestamp_feed_updated_rss <- max(tibble[[timestamp_feed_updated_rss]])
 
   con <- credentials()
-  
+
   query <- sprintf('{"source_id": %s}', source_id)
   max_timestamp_feed_updated_db <- con$find(query, fields = sprintf('{"%s": 1, "_id": 0}', timestamp_feed_updated_db))
 

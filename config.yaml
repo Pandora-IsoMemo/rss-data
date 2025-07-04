@@ -1,3 +1,14 @@
+# Keywords to filter RSS feed texts for (case-insensitive search)
+rss_filter:
+  keywords:
+    - russia
+    - ukraine
+    - israel
+    - palestine
+  search_in: # can be 'item_text' or 'item_title' or both of them
+    - item_text
+
+
 # RSS sources
 sources:
   Source_1:
