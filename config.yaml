@@ -82,14 +82,14 @@ sources:
     id: 10
 
   Source_11:
-   url: "https://www.rt.com/rss/ "
+   url: "https://www.rt.com/rss/"
    name: "Russia Today"
    description: "World News"
    category: "International"
    id: 11
 
   Source_12:
-   url: "https://www.rt.com/rss/ "
+   url: "https://www.scmp.com/rss/91/feed"
    name: "South China Morning Post"
    description: "World News"
    category: "International"
