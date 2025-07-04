@@ -81,6 +81,20 @@ sources:
     category: "International"
     id: 10
 
+  Source_11:
+   url: "https://www.rt.com/rss/ "
+   name: "Russia Today"
+   description: "World News"
+   category: "International"
+   id: 11
+
+  Source_12:
+   url: "https://www.rt.com/rss/ "
+   name: "South China Morning Post"
+   description: "World News"
+   category: "International"
+   id: 12
+
 # Mapping for all columns of the target table on the database
 # Add columns as needed
 # Only change the values (right from the colon), not the keys!
