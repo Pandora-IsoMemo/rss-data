@@ -40,5 +40,5 @@ filter_for_keywords <- function(df, config) {
     mutate(
       filter_keywords = list(keywords),
       filter_places = list(search_in)
-    ) %>% return
+    ) %>% return()
 }

@@ -5,3 +5,4 @@ Jenkinsfile
 ^config.yaml
 .Renviron_template
 .aws
+^License.md$
