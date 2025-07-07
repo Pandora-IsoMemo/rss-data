@@ -11,12 +11,12 @@ rss_filter:
 
 # RSS sources
 sources:
-  Source_1:
-    url: "http://rss.cnn.com/rss/edition_world.rss"
-    name: "CNN" # not used
-    description: "Edition World" # not used
-    category: "Example 1" # not used
-    id: 1
+  # Source_1:
+  #   url: "http://rss.cnn.com/rss/edition_world.rss"
+  #   name: "CNN" # not used
+  #   description: "Edition World" # not used
+  #   category: "Example 1" # not used
+  #   id: 1
 
   Source_2:
     url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
