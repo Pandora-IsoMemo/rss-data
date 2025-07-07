@@ -1,3 +1,14 @@
+# Keywords to filter RSS feed texts for (case-insensitive search)
+rss_filter:
+  keywords:
+    - russia
+    - ukraine
+    - israel
+    - palestine
+  search_in: # can be 'item_text' or 'item_title' or both of them
+    - item_text
+
+
 # RSS sources
 sources:
   # Source_1:
@@ -69,6 +80,20 @@ sources:
     description: "Top Stories"
     category: "International"
     id: 10
+
+  Source_11:
+   url: "https://www.rt.com/rss/"
+   name: "Russia Today"
+   description: "World News"
+   category: "International"
+   id: 11
+
+  Source_12:
+   url: "https://www.scmp.com/rss/91/feed"
+   name: "South China Morning Post"
+   description: "World News"
+   category: "International"
+   id: 12
 
 # Mapping for all columns of the target table on the database
 # Add columns as needed
