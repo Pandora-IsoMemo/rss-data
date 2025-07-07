@@ -1,4 +1,4 @@
-# rssData 0.2.0
+# rssData 25.07.0
 
 ## New Features
 -  **filter feature**: It allows that RSS texts can be filtered based on keywords specified in the config file.
