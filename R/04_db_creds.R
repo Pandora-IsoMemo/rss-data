@@ -43,7 +43,7 @@ credentials <- function() {
 update_database <- function(tibble, config) {
   # skip if try error
   if (inherits(tibble, "try-error") || !is.data.frame(tibble) || nrow(tibble) == 0) {
-    return(tibble)
+    return(invisible(NULL))
   }
 
   mapping <- read_field_mapping(config)
