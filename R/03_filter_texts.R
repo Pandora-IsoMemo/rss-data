@@ -29,7 +29,7 @@ filter_tibble <- function(df, search_in, regex_pattern) {
 #' @export
 filter_for_keywords <- function(df, config) {
   # skip if try error
-  if (inherits(df, "try-error")) {
+  if (inherits(df, "try-error") || !is.data.frame(df)) {
     return(df)
   }
 
