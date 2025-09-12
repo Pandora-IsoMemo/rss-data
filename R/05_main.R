@@ -12,7 +12,7 @@ main <- function(config_file = "config.yaml") {
   # apply keyword filters
   data_tibbles <- lapply(data_tibbles, function(x) try(filter_for_keywords(x, config)))
   # Determine bad inputs
-  input_bad <- vapply(function(x) inherits(x, "try-error") || !is.data.frame(x), logical(1))
+  input_bad <- vapply(data_tibbles, function(x) inherits(x, "try-error") || !is.data.frame(x), logical(1))
   # write to database (if newer than db entries)
   res <- lapply(data_tibbles, function(x) try(update_database(x, config)))
   # Catch post-call errors (if update_database itself failed)
