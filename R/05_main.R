@@ -20,9 +20,7 @@ main <- function(config_file = "config.yaml") {
 
   # warn if any input failed
   if (any(input_bad)) {
-    source_names <- sapply(feeds, function(x) x$name)
-    source_ids <- sapply(feeds, function(x) x$id)
-    sources <- paste0(source_names, " (id: ", source_ids, ")")
+    sources <- sapply(feeds, function(x) paste0(x$name, " (source_id: ", x$id, ")"))
     log_warn(
       "Some feeds could not be read or processed: %s. See above for details.",
       paste(sources[input_bad], collapse = ", "))

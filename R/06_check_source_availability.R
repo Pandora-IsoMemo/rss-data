@@ -29,12 +29,10 @@ check_source_availability <- function() {
   two_weeks_ago <- Sys.time() - 14 * 24 * 60 * 60
   stale <- result[result$ts_last_feed_updated < two_weeks_ago, ]
   if (nrow(stale) > 0) {
-    warning(
-      sprintf(
-        "WARNING: %d source(s) are outdated (no update in the last ~2 weeks). Affected source_ids: %s",
-        nrow(stale),
-        paste(stale$source_id, collapse = ", ")
-      )
+    log_warn(
+      "%d source(s) are outdated (no update in the last ~2 weeks). Affected source_ids: %s",
+      nrow(stale),
+      paste(stale$source_id, collapse = ", ")
     )
   }
   invisible(TRUE)
