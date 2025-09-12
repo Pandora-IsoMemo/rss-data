@@ -33,6 +33,8 @@ filter_for_keywords <- function(df, config) {
     return(df)
   }
 
+  source_id <- unique(tibble$source_id)
+
   keywords <- config$rss_filter$keywords
   search_in <- config$rss_filter$search_in
 
@@ -41,9 +43,15 @@ filter_for_keywords <- function(df, config) {
 
   filtered_tibbles <- filter_tibble(df, search_in, regex_pattern)
 
-  filtered_tibbles %>%
+  filtered_tibbles <- filtered_tibbles %>%
     mutate(
       filter_keywords = list(keywords),
       filter_places = list(search_in)
-    ) %>% return()
+    )
+
+  if (nrow(filtered_tibbles) == 0) {
+    logging("No entries matched keywords for source_id %s. Nothing to update.", source_id)
+  }
+
+  return(filtered_tibbles)
 }
