@@ -11,11 +11,13 @@ main <- function(config_file = "config.yaml") {
   data_tibbles <- lapply(feeds, function(x) try(read_rss_feeds(x, config)))
   # apply keyword filters
   data_tibbles <- lapply(data_tibbles, function(x) try(filter_for_keywords(x, config)))
+  # Determine bad inputs
+  input_bad <- vapply(function(x) inherits(x, "try-error") || !is.data.frame(x), logical(1))
   # write to database (if newer than db entries)
   res <- lapply(data_tibbles, function(x) try(update_database(x, config)))
-  invisible(
-    if (any(unlist(lapply(res, inherits, what = "try-error")))) 1
-    else 0
-  )
+  # Catch post-call errors (if update_database itself failed)
+  post_errors <- vapply(res, inherits, what = "try-error", FUN.VALUE = logical(1))
+
+  invisible(if (any(input_bad | post_errors)) 1L else 0L)
 }
 

@@ -1,3 +1,8 @@
+# rssData 25.09.1
+
+## Updates
+- improved error logging and status (#13).
+
 # rssData 25.09.0
 
 ## Bug Fixes

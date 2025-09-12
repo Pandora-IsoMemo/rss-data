@@ -12,6 +12,11 @@ read_rss_feeds <- function(source, config) {
   logging("Reading source feed %s.", source$url)
 
   feed <- tidyfeed(source$url)
+  if (!is.data.frame(feed)) {
+    logging("Could not read feed for source_id %s. Skipping filtering of feed and update of database.", source$id)
+    return(feed)
+  }
+
   feed[["source_id"]] <- source$id
   feed_columns <- colnames(feed)
   feed_data <- feed[, feed_columns %in% mapping$rss, drop = FALSE]
