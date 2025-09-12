@@ -18,6 +18,16 @@ main <- function(config_file = "config.yaml") {
   # Catch post-call errors (if update_database itself failed)
   post_errors <- vapply(res, inherits, what = "try-error", FUN.VALUE = logical(1))
 
-  invisible(if (any(input_bad | post_errors)) 1L else 0L)
+  # warn if any input failed
+  if (any(input_bad)) {
+    source_names <- sapply(feeds, function(x) x$name)
+    source_ids <- sapply(feeds, function(x) x$id)
+    sources <- paste0(source_names, " (id: ", source_ids, ")")
+    log_warn(
+      "Some feeds could not be read or processed: %s. See above for details.",
+      paste(sources[input_bad], collapse = ", "))
+  }
+
+  invisible(if (all(input_bad) || any(post_errors)) 1L else 0L)
 }
 
