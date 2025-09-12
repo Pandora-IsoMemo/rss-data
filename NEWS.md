@@ -1,3 +1,8 @@
+# rssData 25.07.0
+
+## Bug Fixes
+- Fixed an issue where errors in a single source’s pipeline could block filtering or database updates.
+  These are now skipped for the affected source (#13).
 
 # rssData 25.07.0
 

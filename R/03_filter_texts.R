@@ -28,6 +28,11 @@ filter_tibble <- function(df, search_in, regex_pattern) {
 #' @return A filtered tibble where the specified columns contain one of the keywords (case-insensitive)
 #' @export
 filter_for_keywords <- function(df, config) {
+  # skip if try error
+  if (inherits(df, "try-error")) {
+    return(df)
+  }
+
   keywords <- config$rss_filter$keywords
   search_in <- config$rss_filter$search_in
 

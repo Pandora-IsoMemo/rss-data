@@ -41,6 +41,11 @@ credentials <- function() {
 #' @param config (list) Configuration file with column mapping and RSS field names.
 #' @export
 update_database <- function(tibble, config) {
+  # skip if try error
+  if (inherits(tibble, "try-error")) {
+    return(tibble)
+  }
+
   mapping <- read_field_mapping(config)
   source_id <- unique(tibble$source_id)
   logging("Start to update database for source_id %s.", source_id)

@@ -10,7 +10,7 @@ main <- function(config_file = "config.yaml") {
   # read text from each entry for each rss source
   data_tibbles <- lapply(feeds, function(x) try(read_rss_feeds(x, config)))
   # apply keyword filters
-  data_tibbles <- lapply(data_tibbles, function(x) filter_for_keywords(x, config))
+  data_tibbles <- lapply(data_tibbles, function(x) try(filter_for_keywords(x, config)))
   # write to database (if newer than db entries)
   res <- lapply(data_tibbles, function(x) try(update_database(x, config)))
   invisible(
