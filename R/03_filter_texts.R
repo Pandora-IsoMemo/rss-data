@@ -33,7 +33,7 @@ filter_for_keywords <- function(df, config) {
     return(df)
   }
 
-  source_id <- unique(tibble$source_id)
+  source_id <- unique(df$source_id)
 
   keywords <- config$rss_filter$keywords
   search_in <- config$rss_filter$search_in
