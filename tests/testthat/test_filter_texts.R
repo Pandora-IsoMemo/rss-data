@@ -83,3 +83,16 @@ test_that("filter_for_keywords returns empty tibble if no matches", {
 
   expect_equal(nrow(result), 0)
 })
+
+test_that("filter_for_keywords handles try-error input gracefully", {
+  dfconfig <- list(
+    rss_filter = list(
+      keywords = c("keyword"),
+      search_in = c("item_title")
+    )
+  )
+
+  result <- filter_for_keywords(try(stop("an error"), silent = TRUE), config)
+
+  expect_true(inherits(result, "try-error"))
+})
