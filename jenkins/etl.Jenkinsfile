@@ -1,9 +1,13 @@
 pipeline {
     agent any
     triggers {
-        cron('H 7 * * *')
+      cron('H 7 * * *')
     }
-    options { disableConcurrentBuilds() }
+    options {
+      disableConcurrentBuilds()
+      buildDiscarder(logRotator(daysToKeepStr: '30'))
+      timeout(time: 10, unit: 'MINUTES')
+    }
     environment {
         CUR_PROJ = 'rss-data' // github repo name
         CUR_PKG_FOLDER = '.' // defaults to root
@@ -11,16 +15,26 @@ pipeline {
         CREDENTIALS = credentials('rss-data-renviron')
     }
     stages {
-        stage('ETL') {
-            when  { branch 'main' }
+        stage('rss-data-ETL') {
             steps {
                 sh '''
                 docker run --rm --network host \
                  --env-file $CREDENTIALS \
                  $CUR_PROJ-ETL-$TMP_SUFFIX
-                docker rmi $CUR_PROJ-ETL-$TMP_SUFFIX
                 '''
             }
+            post {
+                always {
+                    cleanWs()
+                }
+            }
         }
+    }
+    post {
+     always {
+         sh '''
+         docker stop $CUR_PROJ-$JOB_NAME-$TMP_SUFFIX || :
+         '''
+      }
     }
 }
