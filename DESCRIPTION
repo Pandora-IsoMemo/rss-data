@@ -1,7 +1,7 @@
 Package: rssData
 Type: Package
 Title: Saving RSS fetched text in a central database
-Version: 25.09.7
+Version: 25.10.0
 Authors@R: person("Sarah", "Wagner", email = "sarah.wagner@inwt-statistics.de", role = c("aut", "cre"))
 Maintainer: INWT Statistics <sarah.wagner@inwt-statistics.de>
 Description: The rssData package is designed to manage and store daily RSS feed entries into a 

@@ -1,3 +1,9 @@
+# rssData 25.10.0
+
+## Updates
+
+- Update to R ver 4.4.3
+
 # rssData 25.09.1
 
 ## Updates
