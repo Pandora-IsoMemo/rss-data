@@ -14,6 +14,7 @@ pipeline {
         CUR_PKG_FOLDER = '.' // defaults to root
         TMP_SUFFIX = """${sh(returnStdout: true, script: 'echo `cat /dev/urandom | tr -dc \'a-z\' | fold -w 6 | head -n 1`')}"""
         CREDENTIALS = credentials('rss-data-renviron')
+        R_SCRIPT = 'inst/RScripts/exec_main.R'
     }
     stages {
         stage('rss-data-ETL') {
@@ -22,7 +23,7 @@ pipeline {
                 docker run --rm --network host \
                   --name $CUR_PROJ-ETL-$TMP_SUFFIX
                  --env-file $CREDENTIALS \
-                 $REGISTRY/$CUR_PROJ
+                 $REGISTRY/$CUR_PROJ Rscript $R_SCRIPT
                 '''
             }
             post {
