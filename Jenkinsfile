@@ -6,6 +6,7 @@ pipeline {
         CUR_PKG_FOLDER = '.' // defaults to root
         TMP_SUFFIX = """${sh(returnStdout: true, script: 'echo `cat /dev/urandom | tr -dc \'a-z\' | fold -w 6 | head -n 1`')}"""
         CREDENTIALS = credentials('rss-data-renviron')
+        GH_TOKEN = credentials("github-isomemo")
     }
     stages {
         stage('Testing') {
