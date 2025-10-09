@@ -21,7 +21,7 @@ pipeline {
             steps {
                 sh '''
                 docker run --rm --network host \
-                  --name $CUR_PROJ-ETL-$TMP_SUFFIX
+                  --name $CUR_PROJ-ETL-$TMP_SUFFIX \
                  --env-file $CREDENTIALS \
                  $REGISTRY/$CUR_PROJ Rscript $R_SCRIPT
                 '''
