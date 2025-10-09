@@ -1,4 +1,4 @@
-FROM inwt/r-batch:4.1.2
+FROM inwt/r-batch:4.4.3
 
 RUN apt-get update && apt-get install -y \
     libssl-dev \
