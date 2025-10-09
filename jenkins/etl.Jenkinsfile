@@ -23,7 +23,7 @@ pipeline {
                 docker run --rm --network host \
                   --name $CUR_PROJ-ETL-$TMP_SUFFIX \
                  --env-file $CREDENTIALS \
-                 $REGISTRY/$CUR_PROJ Rscript $R_SCRIPT
+                 $REGISTRY/$CUR_PROJ:main Rscript $R_SCRIPT
                 '''
             }
             post {
