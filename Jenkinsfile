@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    triggers {
-        cron('H 7 * * *')
-    }
     options { disableConcurrentBuilds() }
     environment {
         CUR_PROJ = 'rss-data' // github repo name
@@ -22,18 +19,18 @@ pipeline {
                 '''
             }
         }
-        stage('ETL') {
-            when  { branch 'main' }
+        stage('Deploy R-package') {
+            when { branch 'main' }
             steps {
                 sh '''
-                docker build -t tmp-$CUR_PROJ-$TMP_SUFFIX .
-                docker run --rm --network host \
-                 --env-file $CREDENTIALS \
-                 tmp-$CUR_PROJ-$TMP_SUFFIX
-                docker rmi tmp-$CUR_PROJ-$TMP_SUFFIX
+                curl https://raw.githubusercontent.com/Pandora-IsoMemo/drat/main/deploy.sh > deploy.sh
+                # Expects environment variables:
+                # CUR_PROJ
+                # TMP_SUFFIX
+                # GH_TOKEN_PSW -- a GitHub personal access token with write access to the drat repo
+                bash deploy.sh
                 '''
             }
         }
-
     }
 }
