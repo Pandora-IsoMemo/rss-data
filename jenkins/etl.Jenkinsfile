@@ -34,17 +34,16 @@ pipeline {
         }
     }
     post {
-     always {
-         sh '''
-         docker stop $CUR_PROJ-$JOB_NAME-$TMP_SUFFIX || :
-         '''
-      }
-      always {
-          slackSend(
-              channel: '#mpi-alerts',
-              message: "Job *${env.JOB_NAME} [${env.BUILD_NUMBER}]* finished with status: *${currentBuild.currentResult}* in ${currentBuild.durationString}. \nDetails: ${env.BUILD_URL}",
-              color: currentBuild.currentResult == 'SUCCESS' ? 'good' : (currentBuild.currentResult == 'FAILURE' ? 'danger' : 'warning')
-          )
-      }
+        always {
+             sh '''
+             docker stop $CUR_PROJ-$JOB_NAME-$TMP_SUFFIX || :
+             '''
+
+              slackSend(
+                  channel: '#mpi-alerts',
+                  message: "Job *${env.JOB_NAME} [${env.BUILD_NUMBER}]* finished with status: *${currentBuild.currentResult}* in ${currentBuild.durationString}. \nDetails: ${env.BUILD_URL}",
+                  color: currentBuild.currentResult == 'SUCCESS' ? 'good' : (currentBuild.currentResult == 'FAILURE' ? 'danger' : 'warning')
+              )
+        }
     }
 }
