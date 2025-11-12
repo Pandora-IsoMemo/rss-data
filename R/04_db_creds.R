@@ -13,6 +13,7 @@
 #'   \item \code{DB_PORT}: The port number of the MongoDB server.
 #' }
 #'
+#' @param collection character, name of MongoDB collection
 #' @return A mongo connection object that can be used to interact with the MongoDB database.
 #'
 #' @export
