@@ -6,6 +6,8 @@
 #' @importFrom tidyRSS tidyfeed
 #' @importFrom stats setNames
 #' @importFrom mongolite mongo
+#' @importFrom purrr map_df
+#' @importFrom glue glue
 #' @import dplyr
 #' @importFrom rlang :=
 NULL

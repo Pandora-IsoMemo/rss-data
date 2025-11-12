@@ -95,6 +95,20 @@ sources:
    category: "International"
    id: 12
 
+  Source_13:
+   url: "https://www.japantimes.co.jp/feed/"
+   name: "the japan times"
+   description: "World News"
+   category: "International"
+   id: 13
+
+  Source_14:
+   url: "https://mg.co.za/feed/"
+   name: "Mail & Guardian"
+   description: "World News"
+   category: "International"
+   id: 14
+
 # Mapping for all columns of the target table on the database
 # Add columns as needed
 # Only change the values (right from the colon), not the keys!

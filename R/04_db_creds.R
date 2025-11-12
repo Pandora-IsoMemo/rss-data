@@ -16,7 +16,7 @@
 #' @return A mongo connection object that can be used to interact with the MongoDB database.
 #'
 #' @export
-credentials <- function() {
+credentials <- function(collection = Sys.getenv("DB_COLLECTION")) {
   URI <- sprintf(
     "mongodb://%s:%s@%s:%s/%s",
     Sys.getenv("DB_USER"),
@@ -26,7 +26,7 @@ credentials <- function() {
     Sys.getenv("DB_NAME")
   )
 
-  return(mongo(collection = Sys.getenv("DB_COLLECTION"), db = Sys.getenv("DB_NAME"), url = URI))
+  return(mongo(collection = collection, db = Sys.getenv("DB_NAME"), url = URI))
 }
 
 
