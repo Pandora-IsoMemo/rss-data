@@ -100,7 +100,7 @@ now <- Sys.time()
         source_id = sid,
         source_name = updated_sources$source_name.x[i],
         source_url = updated_sources$source_url.x[i],
-        date_added = Sys.time(),
+        date_added = now,
         date_removed = as.POSIXct(NA, tz = "UTC")
       ))
     }
