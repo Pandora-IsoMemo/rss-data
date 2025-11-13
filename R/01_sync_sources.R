@@ -92,7 +92,7 @@ now <- Sys.time()
       # mark old entry as removed
       con$update(
         query = paste0('{"source_id": "', sid, '"}'),
-        update = paste0('{"$set": {"date_removed": {"$date": "', format(Sys.time(), "%Y-%m-%dT%H:%M:%S%z"), '"}}}')
+        update = paste0('{"$set": {"date_removed": {"$date": "', format(now, "%Y-%m-%dT%H:%M:%S%z"), '"}}}')
       )
 
       # Insert new entry (same id, updated name and url)
