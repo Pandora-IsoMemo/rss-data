@@ -38,7 +38,7 @@ sync_sources_with_mongo <- function(config) {
     new_sources <- mutate(
       new_sources,
       date_added = Sys.time(),
-      date_removed = NA
+      date_removed = as.POSIXct(NA, tz = "UTC")
     )
     con$insert(new_sources)
     flog.info(
