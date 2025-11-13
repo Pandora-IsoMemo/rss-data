@@ -15,22 +15,9 @@ test_that("db connection can be established", {
   expect_true(class(con)[1] == "mongo")
 })
 
-test_that("required collections exist and not empty: articles and sources", {
-  con <- credentials(collection = "articles")
-
-  collections_result <- con$run('{"listCollections": 1}')
-  collections <- vapply(
-    collections_result$cursor$firstBatch,
-    function(x) x$name,
-    FUN.VALUE = character(1)
-  )
-
-  # Check existence of collections
-  expect_true("articles" %in% collections, info = "'articles' collection is missing.")
-  expect_true("sources" %in% collections, info = "'sources' collection is missing.")
-
-  # Check that collections are not empty
-  count_articles <- con$count()
+test_that("required collections are not empty: articles and sources", {
+  con_articles <- credentials(collection = "articles")
+  count_articles <- con_articles$count()
   expect_gt(count_articles, 0, info = "'articles' collection is empty.")
 
   con_sources <- credentials(collection = "sources")
