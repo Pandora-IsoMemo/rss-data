@@ -39,7 +39,7 @@ now <- Sys.time()
   if (nrow(new_sources) > 0) {
     new_sources <- mutate(
       new_sources,
-      date_added = Sys.time(),
+      date_added = now,
       date_removed = as.POSIXct(NA, tz = "UTC")
     )
     con$insert(new_sources)
