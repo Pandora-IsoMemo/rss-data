@@ -31,6 +31,8 @@ sync_sources_with_mongo <- function(config) {
     stop("The 'sources' collection in MongoDB is empty.", call. = FALSE)
   }
 
+now <- Sys.time()
+
   # detect new sources
   new_sources <- anti_join(config_sources, mongo_sources, by = "source_id")
 
