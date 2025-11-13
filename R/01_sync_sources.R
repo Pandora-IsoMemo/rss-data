@@ -58,7 +58,7 @@ now <- Sys.time()
     for (sid in removed_sources$source_id) {
       con$update(
         query = paste0('{"source_id": "', sid, '"}'),
-        update = paste0('{"$set": {"date_removed": {"$date": "', format(Sys.time(), "%Y-%m-%dT%H:%M:%S%z"), '"}}}')
+        update = paste0('{"$set": {"date_removed": {"$date": "', format(now, "%Y-%m-%dT%H:%M:%S%z"), '"}}}')
       )
     }
     flog.info(
