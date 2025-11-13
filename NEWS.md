@@ -1,3 +1,13 @@
+# rssData 25.11.0
+
+## New Features
+  - **source lifecycle management**: the source meta data is managed via a document in MongoDB (soures collection)
+    - any manipulation of sources will be documented there (adding, changing or deleting)
+    - the goal is to be able to track which sources are or were active in which exact time periods
+
+## Updates
+  - **config**: addition of two new sources 
+  
 # rssData 25.10.0
 
 ## Updates

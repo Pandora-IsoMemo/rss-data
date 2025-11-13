@@ -4,7 +4,10 @@
 \alias{credentials}
 \title{Read MongoDB Credentials from .Renviron}
 \usage{
-credentials()
+credentials(collection = Sys.getenv("DB_COLLECTION"))
+}
+\arguments{
+\item{collection}{character, name of MongoDB collection}
 }
 \value{
 A mongo connection object that can be used to interact with the MongoDB database.
