@@ -9,5 +9,5 @@
 #' @importFrom purrr map_df
 #' @importFrom glue glue
 #' @import dplyr
-#' @importFrom rlang :=
+#' @importFrom rlang := .data
 NULL
