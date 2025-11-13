@@ -22,7 +22,7 @@ sync_sources_with_mongo <- function(config) {
 
   # read current MongoDB sources
   mongo_sources <- tryCatch({
-    mongo_conn$find('{}', fields = '{"_id":0}')
+    con$find('{}', fields = '{"_id":0}')
   }, error = function(e) {
     stop("Failed to fetch data from MongoDB 'sources' collection: ", e$message, call. = FALSE)
   })
@@ -50,7 +50,7 @@ sync_sources_with_mongo <- function(config) {
 
   # detect removed sources
   removed_sources <- anti_join(mongo_sources, config_sources, by = "source_id") %>%
-    filter(is.na(date_removed))
+    filter(is.na(.data$date_removed))
 
   if (nrow(removed_sources) > 0) {
     for (sid in removed_sources$source_id) {
@@ -68,7 +68,7 @@ sync_sources_with_mongo <- function(config) {
 
   # detect updated sources (same id, changed name or url)
   updated_sources <- inner_join(config_sources, mongo_sources, by = "source_id") %>%
-    filter(source_name.x != source_name.y | source_url.x != source_url.y)
+    filter(.data$source_name.x != .data$source_name.y | .data$source_url.x != .data$source_url.y)
 
   if (nrow(updated_sources) > 0) {
     flog.warn(glue(
