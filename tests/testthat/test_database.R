@@ -18,9 +18,9 @@ test_that("db connection can be established", {
 test_that("required collections are not empty: articles and sources", {
   con_articles <- credentials(collection = "articles")
   count_articles <- con_articles$count()
-  expect_gt(count_articles, 0, info = "'articles' collection is empty.")
+  expect_gt(count_articles, 0)
 
   con_sources <- credentials(collection = "sources")
   count_sources <- con_sources$count()
-  expect_gt(count_sources, 0, info = "'sources' collection is empty.")
+  expect_gt(count_sources, 0)
 })
