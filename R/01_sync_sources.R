@@ -27,11 +27,7 @@ sync_sources_with_mongo <- function(config) {
     stop("Failed to fetch data from MongoDB 'sources' collection: ", e$message, call. = FALSE)
   })
 
-  if (nrow(mongo_sources) == 0) {
-    stop("The 'sources' collection in MongoDB is empty.", call. = FALSE)
-  }
-
-now <- Sys.time()
+  now <- Sys.time()
 
   # detect new sources
   new_sources <- anti_join(config_sources, mongo_sources, by = "source_id")
