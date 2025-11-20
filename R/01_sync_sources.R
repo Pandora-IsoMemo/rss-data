@@ -66,7 +66,11 @@ sync_sources_with_mongo <- function(config) {
 
   # detect updated sources (same id, changed name or url)
   updated_sources <- inner_join(config_sources, mongo_sources, by = "source_id") %>%
-    filter(source_name.x != source_name.y | source_url.x != source_url.y)
+    filter(
+      .data$source_name.x != .data$source_name.y |
+        .data$source_url.x  != .data$source_url.y
+    )
+
 
   if (nrow(updated_sources) > 0) {
 

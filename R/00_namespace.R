@@ -1,4 +1,4 @@
-#' @importFrom futile.logger flog.debug flog.info flog.warn
+#' @importFrom futile.logger flog.debug flog.info flog.warn flog.error
 #' @importFrom yaml yaml.load_file
 #' @importFrom httr GET HEAD content timeout
 #' @importFrom rvest read_html html_nodes html_text
