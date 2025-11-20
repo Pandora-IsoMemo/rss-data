@@ -6,3 +6,4 @@ Jenkinsfile
 .Renviron_template
 .aws
 ^License.md$
+^\.github$

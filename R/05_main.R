@@ -5,6 +5,7 @@
 #' @export
 main <- function(config_file = "config.yaml") {
   config <- load_yaml_config(config_file)
+  sync_sources_with_mongo(config)
   # read entries from each rss source
   feeds <- read_rss_sources(config)
   # read text from each entry for each rss source
