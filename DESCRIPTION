@@ -1,7 +1,7 @@
 Package: rssData
 Type: Package
 Title: Saving RSS fetched text in a central database
-Version: 25.10.0
+Version: 25.11.0
 Authors@R: person("Sarah", "Wagner", email = "sarah.wagner@inwt-statistics.de", role = c("aut", "cre"))
 Maintainer: INWT Statistics <sarah.wagner@inwt-statistics.de>
 Description: The rssData package is designed to manage and store daily RSS feed entries into a 
@@ -17,13 +17,14 @@ Imports:
   stringr,
   dplyr,
   rlang,
-  mongolite
+  mongolite,
+  purrr,
+  glue
 Suggests: 
     lintr,
     testthat (>= 3.0.0),
-    purrr,
     tibble
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Config/testthat/edition: 3
