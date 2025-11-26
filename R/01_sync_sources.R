@@ -28,7 +28,7 @@ sync_sources_with_mongo <- function(config) {
   })
 
   now <- Sys.time()
-  
+
   # detect updated sources (same id, changed name or url)
   updated_sources <- inner_join(config_sources, mongo_sources, by = "source_id") %>%
     filter(
@@ -92,36 +92,6 @@ sync_sources_with_mongo <- function(config) {
     )
   } else {
     flog.debug("No removed sources found.")
-  }
-
-  # detect updated sources (same id, changed name or url)
-  updated_sources <- inner_join(config_sources, mongo_sources, by = "source_id") %>%
-    filter(
-      .data$source_name.x != .data$source_name.y |
-        .data$source_url.x  != .data$source_url.y
-    )
-
-
-  if (nrow(updated_sources) > 0) {
-
-    msg <- glue(
-      "Source update detected for {nrow(updated_sources)} source(s).\n",
-      "The following sources have the same source_id but different name or URL:\n\n",
-      paste0(
-        "- source_id: ", updated_sources$source_id, "\n",
-        "  old name:  ", updated_sources$source_name.y, "\n",
-        "  new name:  ", updated_sources$source_name.x, "\n",
-        "  old url:   ", updated_sources$source_url.y, "\n",
-        "  new url:   ", updated_sources$source_url.x,
-        collapse = "\n\n"
-      ),
-      "\n\nPlease update your config file. A changed source should use a NEW source_id."
-    )
-
-    flog.error(msg)
-    stop(msg, call. = FALSE)
-  } else {
-    flog.debug("No updated sources found.")
   }
 
   flog.info("MongoDB sync complete.")
